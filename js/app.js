@@ -7,6 +7,8 @@ user.verticalOffset is to place the player sprite in the correct location
 the inset properties define the bounding box of the collision relative to the width and height of the image sprite
 
 the offset properties are for the vertical alignment of the image sprite within a tile row
+
+TODO: Add image width/height detection?
 */
 
 var config = {
@@ -136,6 +138,7 @@ Player.prototype.handleInput = function(keyPress) {
 };
 
 // evaluate player position
+// TODO: add blocked tile support?
 var checkForCollision = function(anEnemy) {
     /* 
         again, it looks messy, but it tests the bounding box of the inset image - so you can have things like shadows, etc.
@@ -184,6 +187,7 @@ var checkForCollision = function(anEnemy) {
     }
 };
 
+// TODO: remove slower bikes as the game gets harder, add blocked tiles.
 var nextStage = function() {
     for (var i = 0; i <= Math.floor(stage/2)+1; i++) {
         var y = ((Math.floor(Math.random() * grid.numDangerRows) + 2) * config.tiles.verticalOffset) - config.enemies.verticalOffset;
