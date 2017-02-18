@@ -17,7 +17,7 @@ var config = {
         verticalInsetBottom: 0,
         horizontalInsetLeft: 8,
         horizontalInsetRight: 6,
-        verticalOffset: 50,
+        verticalOffset: 70,
         speed: 1
     },
     enemies: {
