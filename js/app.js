@@ -54,12 +54,17 @@ var userStartX = (Math.floor(grid.numCols / 2)) * config.tiles.tileWidth + ((con
 
 // ENEMY CLASS
 // TODO: Add directionality
-var Enemy = function(x, y, speed) {
+var Enemy = function(x, y, speed, type) {
     this.x = x;
     this.y = y;
     this.speed = speed;
     
-    this.sprite = 'images/lightcycle.png';
+    if(type == "rinzler")  {
+        this.sprite = 'images/rinzler.png';
+        this.speed = this.speed * 2;
+    }else   {
+        this.sprite = 'images/lightcycle.png';
+    }
 };
 
 // ENEMY METHODS
@@ -187,6 +192,11 @@ var nextStage = function() {
         // starts the enemy off the canvas to the left
         var enemy = new Enemy((config.enemies.spriteWidth * -1), y, speed);
         allEnemies.push(enemy);
+    }
+    if(stage == 5)  {
+        var speed = Math.random() * 200 + 50;
+        var rinzler = new Enemy((config.enemies.spriteWidth * -1), y, speed, 'rinzler');
+        allEnemies.push(rinzler);
     }
 };
 

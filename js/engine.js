@@ -172,6 +172,7 @@ var Engine = (function(global) {
         'images/goal-grid-square.png',
         'images/safe-grid-square.png',
         'images/lightcycle.png',
+        'images/rinzler.png',
         'images/flynn.png'
     ]);
     Resources.onReady(init);
