@@ -84,13 +84,6 @@ Enemy.prototype.update = function(dt) {
 // rendering
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    
-    /*
-    useful for validating collisions
-    ctx.strokeStyle = 'red';
-    ctx.lineWidth = 1;
-    ctx.strokeRect(this.x, this.y, config.enemies.spriteWidth, config.enemies.spriteHeight);
-    */ 
 };
 
 // PLAYER CLASS
@@ -114,13 +107,6 @@ Player.prototype.update = function() { }
 // rendering
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    
-    /*
-    useful for validating collisions
-    ctx.strokeStyle = 'red';
-    ctx.lineWidth = 1;
-    ctx.strokeRect(this.x, this.y, config.user.spriteWidth, config.user.spriteHeight);
-    */
 };
 
 // process keyboard input
@@ -160,8 +146,6 @@ var checkForCollision = function(anEnemy) {
     ){
 
         // kaboom
-        
-        console.log('collided');
         
         player.x = userStartX;
         player.y = userStartY;
