@@ -29,7 +29,7 @@ var config = {
         verticalInsetBottom: 40,
         horizontalInsetLeft: 25,
         horizontalInsetRight: 3,
-        verticalOffset: 32,
+        verticalOffset: 32
     },
     tiles: {
         tileWidth: 100,
@@ -37,7 +37,7 @@ var config = {
         tileBase: 52,
         verticalOffset: 83
     }
-}
+};
 
 var grid = {
     width: $('canvas').width(),
@@ -45,7 +45,7 @@ var grid = {
     numCols: $('canvas').width() / config.tiles.tileWidth,
     numRows: Math.floor($('canvas').height() / config.tiles.verticalOffset),
     numDangerRows: 4
-}
+};
 
 // HELPER VARIABLES
 
@@ -62,7 +62,7 @@ var Enemy = function(x, y, speed, type) {
     this.speed = speed;
     this.type = 'lightcycle';
     
-    if(type == "rinzler")  {
+    if(type == 'rinzler')  {
         this.sprite = 'images/rinzler.png';
         this.speed = this.speed * 2;
         this.type = 'rinzler';
