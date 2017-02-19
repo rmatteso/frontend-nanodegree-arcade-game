@@ -1,6 +1,33 @@
-frontend-nanodegree-arcade-game
-===============================
+# Udacity Frontend Nanodegree Arcade Game
 
-Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission. Make sure the functions you write are **object-oriented** - either class functions (like Player and Enemy) or class prototype functions such as Enemy.prototype.checkCollisions, and that the keyword 'this' is used appropriately within your class and class prototype functions to refer to the object the function is called upon. Also be sure that the **readme.md** file is updated with your instructions on both how to 1. Run and 2. Play your arcade game.
+This is a Tron-themed clone of the classic arcade game Frogger.  Help Flynn cross the grid through seven stages to win.
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+## Installation
+
+It's easy to install!  Download the files and host using a simple web server, like [WAMP](http://www.wampserver.com/en/) or Node's [http-server](https://www.npmjs.com/package/http-server).  
+
+You can create your own theme by replacing the images being loaded and specifying new dimensions in app.js and engine.js.  Image attributes are located in the config variable, like this:
+
+```javascript
+var config = {
+    user: {
+        spriteWidth: 44,
+        spriteHeight: 85,
+        verticalInsetTop: 0,
+        verticalInsetBottom: 0,
+        horizontalInsetLeft: 8,
+        horizontalInsetRight: 6,
+        verticalOffset: 60,
+        speed: 1
+    }
+}
+
+```
+
+The game runs automatically on page load - try to avoid the light cycles!
+
+## Contributors
+
+Udacity provided the base files - the game engine and resource loader.  I customized the theme and added much of the core game functionality.
+
+Special thanks to Jeff Bridges for being a great dude, and Disney for making a fun reboot of a classic film.
