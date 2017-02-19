@@ -1,6 +1,6 @@
 # Udacity Frontend Nanodegree Arcade Game
 
-This is a Tron-themed clone of the classic arcade game Frogger.  Help Flynn cross the grid through seven stages to win.
+This is a Tron-themed clone of the classic arcade game Frogger.  Help Flynn cross the grid through seven stages to win.  Use the arrow keys (up, down, left, right) to move your user.
 
 ## Installation
 
