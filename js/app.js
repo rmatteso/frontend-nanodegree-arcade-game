@@ -19,7 +19,7 @@ var config = {
         verticalInsetBottom: 0,
         horizontalInsetLeft: 8,
         horizontalInsetRight: 6,
-        verticalOffset: 70,
+        verticalOffset: 60,
         speed: 1
     },
     enemies: {
@@ -43,13 +43,13 @@ var grid = {
     width: $('canvas').width(),
     height: $('canvas').height(),
     numCols: $('canvas').width() / config.tiles.tileWidth,
-    numRows: ($('canvas').height() - 108) / config.tiles.verticalOffset,
+    numRows: Math.floor($('canvas').height() / config.tiles.verticalOffset),
     numDangerRows: 4
 }
 
 // HELPER VARIABLES
 
-var userStartY = grid.numRows * config.tiles.verticalOffset - config.user.verticalOffset;
+var userStartY = (grid.numRows - 1) * config.tiles.verticalOffset - config.user.verticalOffset;
 
 // it's not the easiest to read, but it centers the user based on the width of the sprite & tiles.
 var userStartX = (Math.floor(grid.numCols / 2)) * config.tiles.tileWidth + ((config.tiles.tileWidth / 2) - (config.user.spriteWidth / 2));
@@ -194,6 +194,8 @@ var checkForCollision = function(anEnemy) {
 
 // TODO: remove slower bikes as the game gets harder, add blocked tiles.
 var nextStage = function() {
+    $('#stage').text('Stage: ' + stage);
+    
     for (var i = 0; i <= Math.floor(stage/2)+1; i++) {
         var y = ((Math.floor(Math.random() * grid.numDangerRows) + 2) * config.tiles.verticalOffset) - config.enemies.verticalOffset;
         
@@ -206,6 +208,11 @@ var nextStage = function() {
         var speed = Math.floor(Math.random() * 150 + 100);
         var rinzler = new Enemy((config.enemies.spriteWidth * -1), y, speed, 'rinzler');
         allEnemies.push(rinzler);
+    }
+    
+    //win condition
+    if(stage == 7)  {
+        alert('You win!')
     }
 };
 
