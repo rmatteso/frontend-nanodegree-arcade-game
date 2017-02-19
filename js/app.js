@@ -60,10 +60,12 @@ var Enemy = function(x, y, speed, type) {
     this.x = x;
     this.y = y;
     this.speed = speed;
+    this.type = 'lightcycle';
     
     if(type == "rinzler")  {
         this.sprite = 'images/rinzler.png';
         this.speed = this.speed * 2;
+        this.type = 'rinzler';
     }else   {
         this.sprite = 'images/lightcycle.png';
     }
@@ -82,6 +84,9 @@ Enemy.prototype.update = function(dt) {
     if (this.x >= grid.width) {
         this.x = (config.enemies.spriteWidth * -1); 
         // TODO: Add delay so enemy doesn't immediately show up again... maybe randomize speed
+        if(this.type == 'rinzler')  {
+            this.y = (Math.floor(Math.random() * grid.numDangerRows) + 2) * config.tiles.verticalOffset - config.enemies.verticalOffset;
+        }
     }
 
     // Check for collision with enemies or barrier-walls
@@ -141,7 +146,7 @@ Player.prototype.handleInput = function(keyPress) {
 // TODO: add blocked tile support?
 var checkForCollision = function(anEnemy) {
     /* 
-        again, it looks messy, but it tests the bounding box of the inset image - so you can have things like shadows, etc.
+        Tests the bounding box of the inset rather than the entire image- so you can have things like shadows, reflections etc.
     */
     if(
         (player.x + config.user.horizontalInsetRight) >= (anEnemy.x + config.user.horizontalInsetLeft)
@@ -155,7 +160,7 @@ var checkForCollision = function(anEnemy) {
 
         // kaboom
         
-        player.x = userStartX;
+        //player.x = userStartX;
         player.y = userStartY;
     }
 
@@ -176,7 +181,7 @@ var checkForCollision = function(anEnemy) {
     }
     
     // keep player from falling off of the edge of the grid
-    if (player.y > grid.height - player.height ) {
+    if (player.y + player.height > grid.height - player.height ) {
         player.y = userStartY;
     }
     if (player.x > grid.width - player.width) {
@@ -192,13 +197,13 @@ var nextStage = function() {
     for (var i = 0; i <= Math.floor(stage/2)+1; i++) {
         var y = ((Math.floor(Math.random() * grid.numDangerRows) + 2) * config.tiles.verticalOffset) - config.enemies.verticalOffset;
         
-        var speed = Math.random() * 200 + 50;
+        var speed = Math.floor(Math.random() * 200 + 50);
         // starts the enemy off the canvas to the left
         var enemy = new Enemy((config.enemies.spriteWidth * -1), y, speed);
         allEnemies.push(enemy);
     }
     if(stage == 5)  {
-        var speed = Math.random() * 200 + 50;
+        var speed = Math.floor(Math.random() * 150 + 100);
         var rinzler = new Enemy((config.enemies.spriteWidth * -1), y, speed, 'rinzler');
         allEnemies.push(rinzler);
     }
