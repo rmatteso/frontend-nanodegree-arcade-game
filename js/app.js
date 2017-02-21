@@ -11,6 +11,8 @@ the offset properties are for the vertical alignment of the image sprite within 
 TODO: Add image width/height detection?
 */
 
+'use strict';
+
 var config = {
     user: {
         spriteWidth: 44,
@@ -90,7 +92,7 @@ Enemy.prototype.update = function(dt) {
     }
 
     // Check for collision with enemies or barrier-walls
-    checkForCollision(this);
+    this.checkForCollision();
 };
 
 // rendering
@@ -98,64 +100,20 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// PLAYER CLASS
-// TODO : Fight for the user, add abilities?
-var Player = function(x, y, speed) {
-    this.x = x;
-    this.y = y;
-    this.speed = speed;
-    this.width = config.user.spriteWidth;
-    this.height = config.user.spriteHeight;
-    
-    this.sprite = 'images/flynn.png';
-};
-
-// PLAYER METHODS
-
-/*  can't see a purpose for this at the moment.. commented out here and in engine.js
-Player.prototype.update = function() { }
-*/
-
-// rendering
-Player.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
-
-// process keyboard input
-Player.prototype.handleInput = function(keyPress) {
-    switch(keyPress)    {
-        case 'up':
-            player.y -= config.tiles.verticalOffset * player.speed;
-            break;
-        case 'down':
-            player.y += config.tiles.verticalOffset * player.speed;
-            break;
-        case 'left':
-            player.x -= config.tiles.tileWidth * player.speed;
-            break;
-        case 'right':
-            player.x += config.tiles.tileWidth * player.speed;
-            break;
-        default:
-            // don't do anything
-            // TODO: add some player abilities?
-    }
-};
-
 // evaluate player position
 // TODO: add blocked tile support?
-var checkForCollision = function(anEnemy) {
+Enemy.prototype.checkForCollision = function() {
     /* 
         Tests the bounding box of the inset rather than the entire image- so you can have things like shadows, reflections etc.
     */
     if(
-        (player.x + config.user.horizontalInsetRight) >= (anEnemy.x + config.user.horizontalInsetLeft)
+        (player.x + config.user.horizontalInsetRight) >= (this.x + config.user.horizontalInsetLeft)
         
-        && (player.x + config.user.horizontalInsetLeft) <= anEnemy.x + (config.enemies.spriteWidth - config.enemies.horizontalInsetRight)
+        && (player.x + config.user.horizontalInsetLeft) <= this.x + (config.enemies.spriteWidth - config.enemies.horizontalInsetRight)
         
-        && (player.y + config.user.verticalInsetTop) + config.user.spriteHeight >= (anEnemy.y + config.enemies.verticalInsetTop)
+        && (player.y + config.user.verticalInsetTop) + config.user.spriteHeight >= (this.y + config.enemies.verticalInsetTop)
         
-        && (player.y + config.user.verticalInsetBottom) <= anEnemy.y + (config.enemies.spriteHeight - config.enemies.verticalInsetBottom)
+        && (player.y + config.user.verticalInsetBottom) <= this.y + (config.enemies.spriteHeight - config.enemies.verticalInsetBottom)
     ){
 
         // kaboom
@@ -192,6 +150,53 @@ var checkForCollision = function(anEnemy) {
     }
 };
 
+
+// PLAYER CLASS
+// TODO : Fight for the user, add abilities?
+var Player = function(x, y, speed) {
+    this.x = x;
+    this.y = y;
+    this.speed = speed;
+    this.width = config.user.spriteWidth;
+    this.height = config.user.spriteHeight;
+    
+    this.sprite = 'images/flynn.png';
+};
+
+// PLAYER METHODS
+
+/*  can't see a purpose for this at the moment.. commented out here and in engine.js
+Player.prototype.update = function() { }
+*/
+
+// rendering
+Player.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+// process keyboard input
+Player.prototype.handleInput = function(keyPress) {
+    switch(keyPress)    {
+        case 'up':
+            this.y -= config.tiles.verticalOffset * this.speed;
+            break;
+        case 'down':
+            this.y += config.tiles.verticalOffset * this.speed;
+            break;
+        case 'left':
+            this.x -= config.tiles.tileWidth * this.speed;
+            break;
+        case 'right':
+            this.x += config.tiles.tileWidth * this.speed;
+            break;
+        default:
+            // don't do anything
+            // TODO: add some player abilities?
+    }
+};
+
+
+
 // TODO: remove slower bikes as the game gets harder, add blocked tiles.
 var nextStage = function() {
     $('#stage').text('Stage: ' + stage);
@@ -212,7 +217,7 @@ var nextStage = function() {
     
     //win condition
     if(stage == 7)  {
-        alert('You win!')
+        alert('You win!');
     }
 };
 

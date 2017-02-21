@@ -2,6 +2,8 @@
 
 This is a Tron-themed clone of the classic arcade game Frogger.  Help Flynn cross the grid through seven stages to win.  Use the arrow keys (up, down, left, right) to move your user.
 
+Play the game at [https://rmatteso.github.io/frontend-nanodegree-arcade-game/](https://rmatteso.github.io/frontend-nanodegree-arcade-game/)
+
 ## Installation
 
 It's easy to install!  Download the files and host using a simple web server, like [WAMP](http://www.wampserver.com/en/) or Node's [http-server](https://www.npmjs.com/package/http-server).  
